@@ -19,9 +19,16 @@ class UserController < ApplicationController
 
   def get_current_user
     if current_user
-      render json: { username: current_user.username, id: current_user.id }
+      render json: { username: current_user.username, id: current_user.id, target: current_user.target }
     else
       render json: { error: 'no user' }
+    end
+  end
+
+  def target
+    user == current_user
+    if user && user.target
+      render :json { target: user.target }
     end
   end
 
